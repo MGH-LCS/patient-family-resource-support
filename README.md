@@ -65,7 +65,7 @@ code and should be re-checked whenever the app changes:
 
 | Claim on the page | Source of truth |
 |---|---|
-| Support email | `AppConfig.feedbackEmail` — still carries a `// TODO: confirm` |
+| Support email | `AppConfig.feedbackEmail` — confirmed 2026-08-03 as the monitored destination |
 | iOS 16 or later | `IPHONEOS_DEPLOYMENT_TARGET` across all six build configs |
 | iPhone, not optimized for iPad | `TARGETED_DEVICE_FAMILY = 1` |
 | English and Spanish interface | `AppConfig.enabledLocales` |
