@@ -1,0 +1,226 @@
+/* MGB Patient & Family Resource — support site
+ *
+ * Deliberately dependency-free: no web fonts, no CDN, no build step. The whole
+ * site is three files served straight from GitHub Pages, so it cannot break
+ * because something external went away. Colors mirror the app's theme seeds in
+ * lib/core/theme/app_theme.dart so the page reads as part of the same product.
+ */
+
+:root {
+  --mgb-blue: #003a96;
+  --mgb-teal: #01828e;
+  --ink: #16202e;
+  --ink-muted: #4a5769;
+  --rule: #dde3ec;
+  --surface: #ffffff;
+  --surface-sunken: #f5f7fa;
+  --notice-bg: #fdf3f4;
+  --notice-rule: #ce0037;
+  --draft-bg: #fff8e6;
+  --draft-rule: #a9750a;
+  --measure: 42rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --mgb-blue: #8fb4ff;
+    --mgb-teal: #4fc3cd;
+    --ink: #e8edf4;
+    --ink-muted: #a4b1c2;
+    --rule: #2b3546;
+    --surface: #10151d;
+    --surface-sunken: #171e29;
+    --notice-bg: #2a1319;
+    --notice-rule: #ff6b85;
+    --draft-bg: #2a2312;
+    --draft-rule: #e0b658;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0 1.25rem 5rem;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  text-rendering: optimizeLegibility;
+}
+
+.wrap {
+  max-width: var(--measure);
+  margin: 0 auto;
+}
+
+/* ── Masthead ─────────────────────────────────────────────────────────────── */
+
+header.masthead {
+  border-bottom: 1px solid var(--rule);
+  padding: 2.5rem 0 1.75rem;
+  margin-bottom: 2.25rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.4rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mgb-teal);
+}
+
+h1 {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.75rem, 5vw, 2.25rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--mgb-blue);
+}
+
+.masthead p {
+  margin: 0;
+  color: var(--ink-muted);
+}
+
+/* ── Typography ───────────────────────────────────────────────────────────── */
+
+h2 {
+  margin: 2.75rem 0 0.75rem;
+  font-size: 1.3125rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--mgb-blue);
+}
+
+h3 {
+  margin: 1.75rem 0 0.35rem;
+  font-size: 1.0625rem;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+ul {
+  margin: 0 0 1rem;
+  padding-left: 1.25rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+a {
+  color: var(--mgb-blue);
+  text-underline-offset: 0.15em;
+}
+
+a:hover {
+  color: var(--mgb-teal);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--mgb-teal);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+strong {
+  font-weight: 650;
+}
+
+/* ── Callouts ─────────────────────────────────────────────────────────────── */
+
+/* Emergency notice. First thing on the page by design: a caregiver arriving
+ * here in a crisis must be routed to 911 before anything else competes. */
+.notice {
+  background: var(--notice-bg);
+  border-left: 4px solid var(--notice-rule);
+  border-radius: 0 6px 6px 0;
+  padding: 1rem 1.25rem;
+  margin: 0 0 2.25rem;
+}
+
+.notice p {
+  margin: 0;
+}
+
+.notice p + p {
+  margin-top: 0.6rem;
+}
+
+.draft-banner {
+  background: var(--draft-bg);
+  border-left: 4px solid var(--draft-rule);
+  border-radius: 0 6px 6px 0;
+  padding: 1rem 1.25rem;
+  margin: 0 0 2.25rem;
+  font-size: 0.9375rem;
+}
+
+.draft-banner p {
+  margin: 0;
+}
+
+.contact-card {
+  background: var(--surface-sunken);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 1.25rem 1.375rem;
+  margin: 0 0 1.25rem;
+}
+
+.contact-card p:last-child {
+  margin-bottom: 0;
+}
+
+.contact-card .email {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+/* ── Footer ───────────────────────────────────────────────────────────────── */
+
+footer {
+  border-top: 1px solid var(--rule);
+  margin-top: 3.5rem;
+  padding-top: 1.5rem;
+  font-size: 0.9375rem;
+  color: var(--ink-muted);
+}
+
+footer p {
+  margin: 0 0 0.5rem;
+}
+
+/* ── Print (the privacy policy gets printed for legal review) ─────────────── */
+
+@media print {
+  body {
+    padding: 0;
+    font-size: 11pt;
+    color: #000;
+    background: #fff;
+  }
+
+  a {
+    color: #000;
+  }
+
+  .draft-banner {
+    border: 1px solid #000;
+  }
+}
