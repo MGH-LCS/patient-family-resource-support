@@ -192,6 +192,85 @@ strong {
   font-weight: 600;
 }
 
+/* ── Landing page ─────────────────────────────────────────────────────────── */
+
+.tagline {
+  font-size: 1.125rem;
+}
+
+/* Store buttons. Sized to Apple's 44x44pt minimum touch target with room to
+ * spare — the audience is tired parents on a phone, often one-handed. */
+.store-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 0 0 1rem;
+}
+
+.store-btn {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 3.5rem;
+  padding: 0.5rem 1.5rem;
+  border-radius: 10px;
+  border: 1px solid var(--mgb-blue);
+  background: var(--mgb-blue);
+  color: var(--surface);
+  text-decoration: none;
+  line-height: 1.25;
+}
+
+.store-btn:hover {
+  background: var(--mgb-teal);
+  border-color: var(--mgb-teal);
+  color: var(--surface);
+}
+
+/* Pending state: the listing does not exist yet, so this must not look or
+ * behave like a working link. Muted, not underlined, no pointer cursor. */
+.store-btn.is-pending {
+  background: transparent;
+  border-style: dashed;
+  border-color: var(--rule);
+  color: var(--ink-muted);
+  cursor: default;
+}
+
+.store-btn-sub {
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.store-btn-main {
+  font-size: 1.125rem;
+  font-weight: 650;
+}
+
+.availability {
+  color: var(--ink-muted);
+  font-size: 0.9375rem;
+  margin-bottom: 2rem;
+}
+
+/* Feature blocks carry their own rule so the page scans as a list of distinct
+ * capabilities rather than one wall of prose. */
+.feature {
+  border-top: 1px solid var(--rule);
+  padding-top: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.feature h3 {
+  margin-top: 0;
+  color: var(--mgb-blue);
+}
+
+.feature p:last-child {
+  margin-bottom: 0;
+}
+
 /* ── Footer ───────────────────────────────────────────────────────────────── */
 
 footer {

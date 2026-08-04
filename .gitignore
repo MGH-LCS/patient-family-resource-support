@@ -1,13 +1,2 @@
-# The privacy policy draft is deliberately NOT committed.
-#
-# GitHub Pages requires this repo to be public, so anything committed here is
-# world-readable the moment it lands — including on a side branch. An unapproved
-# privacy policy published under an MGH-LCS URL reads as an official Mass General
-# Brigham representation, which is exactly what the legal review is for.
-#
-# The draft therefore lives only on the author's machine until sign-off.
-# See README.md § "Publishing the privacy policy" for the promotion steps.
-_pending-legal-review/
-
 # macOS
 .DS_Store

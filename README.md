@@ -1,17 +1,27 @@
-# Support site — MGB Patient &amp; Family Resource
+# Public site — MGB Patient &amp; Family Resource
 
-Static support and privacy pages for the **MGB Patient & Family Resource** iOS app
-(Mass General Brigham for Children). Served by GitHub Pages.
+Static landing, support, and privacy pages for the **MGB Patient & Family Resource** iOS
+app (Mass General Brigham for Children). Served by GitHub Pages.
 
 | | |
 |---|---|
-| Live support page | https://mgh-lcs.github.io/patient-family-resource-support/ |
-| Live privacy policy | *not yet published — see below* |
+| Landing page | https://mgh-lcs.github.io/patient-family-resource-support/ |
+| Support page | https://mgh-lcs.github.io/patient-family-resource-support/support.html |
+| Privacy policy | https://mgh-lcs.github.io/patient-family-resource-support/privacy.html |
 | App source | `MGH-LCS/patient-family-resource-app` (private) |
 | Store copy + rejection-risk notes | `STORE-LISTING.md` in the app repo |
 
-These two URLs fill the **Support URL** and **Privacy Policy URL** fields in App Store
-Connect and Google Play Console. Both are required for submission.
+The support and privacy URLs fill the **Support URL** and **Privacy Policy URL** fields in
+App Store Connect and Google Play Console; both are required for submission. The landing
+page is the optional **Marketing URL**, and — more importantly — the target for any QR
+code or printed handout given to families on the unit.
+
+> **The root URL changed on 2026-08-03.** It used to serve the support page; it now serves
+> the landing page, and support moved to `support.html`. The root is what a QR code on a
+> PICU handout resolves to, and a family scanning it wants "what is this and how do I get
+> it", not an FAQ. Nothing was submitted to either store before the move, so no live field
+> needed updating — but if you have already pasted the old root URL anywhere, it is now the
+> landing page rather than support.
 
 ## Why GitHub Pages
 
@@ -28,34 +38,59 @@ file to this repo and point DNS at Pages — the pages themselves don't change.
 ## Structure
 
 ```
-index.html              support page — live
+index.html              landing page — live (Marketing URL, QR-code target)
+support.html            support page + FAQ — live (Support URL)
+privacy.html            privacy policy — live (Privacy Policy URL)
 assets/style.css        shared styles; no build step, no external dependencies
-_pending-legal-review/
-  privacy.html          privacy policy — DRAFT, gitignored, NOT published
 ```
+
+The emergency notice ("this app is not for medical emergencies") appears at the top of
+both live pages, in the same position, on purpose. A caregiver may land on either one in
+a crisis. **If you edit it on one page, edit it on the other.**
+
+The landing page's store buttons are inert placeholders styled as "coming soon" — the
+listing does not exist yet, and a live-looking button that 404s is worse than an honest
+label. Activation steps are in a comment directly above them in `index.html`. Official
+Apple/Google badge artwork is deliberately not used, because it would mean hosting
+downloaded brand assets in a site whose whole premise is that it has no dependencies to
+break.
 
 There is no build step and no framework. Edit the HTML, commit, push; Pages redeploys
 in about a minute. `.nojekyll` disables Jekyll so files are served exactly as committed.
 
-## Publishing the privacy policy
+## The privacy policy was published ahead of MGB legal review
 
-The draft is **gitignored on purpose**. This repo has to be public for Pages to work on
-a free plan, so anything committed is world-readable immediately — including on a side
-branch. An unapproved privacy policy sitting at an MGH-LCS URL reads as an official MGB
-representation, and its accuracy is a legal question, not an engineering one.
+**Published 2026-08-04, effective date 4 August 2026, deliberately before legal sign-off.**
+Apple will not review a submission without a live Privacy Policy URL, so the choice was
+between publishing an accurate policy now or not submitting. It was published.
 
-When MGB legal signs off:
+What that decision does and does not mean:
 
-1. Delete the `.draft-banner` block from `_pending-legal-review/privacy.html`.
-2. Fill in the real effective date (replace `[to be completed on approval]`).
-3. `mv _pending-legal-review/privacy.html privacy.html`
-4. Fix the two relative paths inside it: `../assets/style.css` → `assets/style.css`,
-   and `../index.html` → `index.html`.
-5. In `index.html`, uncomment the marked privacy-policy sentence under
-   *"What information does the app collect?"*.
-6. Remove the `_pending-legal-review/` line from `.gitignore`.
-7. Commit, push, then **load the live URL and confirm it renders** before pasting it
-   into App Store Connect. A privacy URL that 404s is an automatic rejection.
+- **It is accurate.** Every claim was verified against the shipping code before publishing,
+  not against the older store-copy draft (which had known errors). The two load-bearing
+  claims specifically: advertising-identifier collection is disabled in
+  `ios/Runner/Info.plist` (`GOOGLE_ANALYTICS_ADID_COLLECTION_ENABLED` /
+  `..._ALLOW_AD_PERSONALIZATION_SIGNALS`, both `false`) and in `AndroidManifest.xml`; and
+  search text cannot be transmitted because `AnalyticsService.logSearch` takes
+  `{int resultCount, int queryLength}` and has no parameter capable of carrying a query
+  string. It also enumerates survey fields the July draft omitted (`device_id`, `audience`,
+  `question_set_version`).
+- **It is still a public representation made on behalf of Mass General Brigham**, at an
+  MGH-LCS URL, and legal review is still owed. Accuracy is necessary but not sufficient —
+  institutions have views on wording, retention, and who may speak for them.
+- **It is cheap to change.** The policy can be revised at the same URL without an app
+  update and without an App Store resubmission. If legal comes back with edits, apply them
+  and bump the effective date — no build, no review cycle.
+
+**Route it to MGB legal in parallel with the App Store submission, not after.** The window
+where an unreviewed policy is publicly live is the risk being carried; shortening it is the
+mitigation.
+
+### If legal requires changes
+
+1. Edit `privacy.html`; update the effective date and the "Last updated" line in the footer.
+2. Commit, push, confirm the live page renders.
+3. No App Store Connect change is needed unless the URL itself moves.
 
 ## Keeping the pages honest
 

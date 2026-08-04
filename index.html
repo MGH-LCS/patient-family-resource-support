@@ -3,8 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Support — MGB Patient &amp; Family Resource</title>
-<meta name="description" content="Help and contact information for the MGB Patient &amp; Family Resource app from Mass General Brigham for Children.">
+<title>MGB Patient &amp; Family Resource</title>
+<meta name="description" content="A free iPhone app from Mass General Brigham for Children, with guides, contacts, and support for families of children in the hospital.">
+
+<!-- Link previews. When a nurse texts this URL to a family, or it goes in a
+     discharge packet, the preview card is the first thing they see. Kept to
+     plain og/twitter tags with no image: there is no hosted image asset yet,
+     and a broken og:image renders worse than none. Add og:image here once a
+     1200x630 card exists in assets/. -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="MGB Patient &amp; Family Resource">
+<meta property="og:description" content="Guides, contacts, and support for families of children in the hospital — from the care team at Mass General Brigham for Children.">
+<meta property="og:url" content="https://mgh-lcs.github.io/patient-family-resource-support/">
+<meta name="twitter:card" content="summary">
+
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -13,88 +25,94 @@
   <header class="masthead">
     <p class="eyebrow">Mass General Brigham for Children</p>
     <h1>MGB Patient &amp; Family Resource</h1>
-    <p>Support and frequently asked questions</p>
+    <p class="tagline">Guides, contacts, and support for your family — written by your
+    child's care team, and available even when the hospital Wi-Fi isn't.</p>
   </header>
 
   <main>
 
+    <!-- Same emergency notice, same position, as the support page. A caregiver
+         who lands here in a crisis must be routed to 911 before anything on the
+         page competes for attention. If you edit one, edit both. -->
     <div class="notice">
       <p><strong>This app is not for medical emergencies.</strong> If you think your child
       is having a medical emergency, call <strong>911</strong> or get the nearest nurse or
       doctor right away.</p>
-      <p>This page is for help with the app itself. For anything about your child's care,
-      please speak with your care team.</p>
     </div>
 
-    <h2>Contact us</h2>
+    <!-- ── STORE BUTTONS ──────────────────────────────────────────────────────
+         The app is not published yet, so these are deliberately inert and
+         labelled as such. Shipping live-looking buttons that 404 is worse than
+         saying "coming soon" plainly.
 
-    <div class="contact-card">
-      <p class="email"><a href="mailto:KETAGEN@mgh.harvard.edu?subject=MGB%20Patient%20%26%20Family%20Resource%20app">KETAGEN@mgh.harvard.edu</a></p>
-      <p>We read every message. Please allow a few business days for a reply.</p>
+         TO ACTIVATE, once the listing is live:
+           1. Replace the <span class="store-btn is-pending"> element with:
+              <a class="store-btn" href="https://apps.apple.com/app/idXXXXXXXXX">
+           2. Delete the .availability paragraph below.
+           3. Do the same for Google Play when that listing exists; until then,
+              leave the Play button out entirely rather than showing a dead one.
+
+         Official Apple/Google badge artwork is intentionally NOT used here. Both
+         require downloading brand assets, and this site is deliberately
+         dependency-free — three files, no build step, nothing external that can
+         disappear. Text buttons are compliant and never break. Swap in the
+         official badges later if marketing asks. -->
+    <div class="store-row">
+      <span class="store-btn is-pending">
+        <span class="store-btn-sub">Coming soon to the</span>
+        <span class="store-btn-main">App Store</span>
+      </span>
     </div>
 
-    <p>To help us respond quickly, it's useful to include:</p>
-    <ul>
-      <li>What you were trying to do, and what happened instead</li>
-      <li>The title of the resource or screen involved</li>
-      <li>Your device model and iOS version, if you're reporting a problem with the app</li>
-      <li>The app version, shown in <strong>Settings &rsaquo; About</strong></li>
-    </ul>
+    <p class="availability">The app is currently in testing with families in the Pediatric
+    Intensive Care Unit at Massachusetts General Hospital. If your child is in the PICU and
+    you'd like to try it, ask a member of your care team.</p>
 
-    <p><strong>Please do not include any personal health information</strong> about yourself
-    or your child in an email. We don't need it to help you with the app.</p>
+    <h2>What the app does</h2>
 
-    <h2>Frequently asked questions</h2>
+    <div class="feature">
+      <h3>Find what you need, when you need it</h3>
+      <p>Resources are grouped by topic — your hospital stay, meeting the care team, food and
+      dining, discharge planning, support for parents and families, and more. Search across
+      everything by typing, or hands-free with voice search.</p>
+    </div>
 
-    <h3>The information in the app looks out of date.</h3>
-    <p>Content is updated by the care team and delivered to the app automatically — the app
-    checks for new content in the background about once a day. To check immediately, open
-    <strong>Settings &rsaquo; Check for content updates</strong>. You'll need an internet
-    connection. Once content has been downloaded, it stays available offline.</p>
+    <div class="feature">
+      <h3>Know who to call</h3>
+      <p>A directory of the people and services that support your family, with one tap to
+      call.</p>
+    </div>
 
-    <h3>Something in the app is wrong, outdated, or missing.</h3>
-    <p>Please tell us — email us the title of the resource and what needs to change. You can
-    also use <strong>Settings &rsaquo; Suggest a Resource</strong> to tell us what would be
-    helpful to add.</p>
+    <div class="feature">
+      <h3>Works offline</h3>
+      <p>Everything is stored on your phone, so it opens instantly with spotty Wi-Fi or none
+      at all. When your care team publishes new information, the app picks it up
+      automatically — you don't need to update anything.</p>
+    </div>
 
-    <h3>Which devices does the app work on?</h3>
-    <p>iPhone running iOS 16 or later. The app is designed for iPhone; it will run on iPad
-    but is not optimized for it.</p>
+    <div class="feature">
+      <h3>Keep what matters close</h3>
+      <p>Bookmark the pages your family comes back to, and print or share any resource with
+      relatives who are helping.</p>
+    </div>
 
-    <h3>What languages is the app available in?</h3>
-    <p>The app interface is available in English and Spanish. You can change this at any time
-    in <strong>Settings &rsaquo; Language</strong>. Some individual resources are currently
-    available only in English, and will appear in English even when the app is set to Spanish.
-    We're continuing to add translations.</p>
+    <div class="feature">
+      <h3>Available in English and Spanish</h3>
+      <p>The app interface is available in both. Some individual resources are currently
+      available only in English; we're continuing to add translations.</p>
+    </div>
 
-    <h3>Voice search isn't working.</h3>
-    <p>Voice search needs permission to use your microphone and speech recognition. If you
-    declined when first asked, you can turn it back on in your iPhone's
-    <strong>Settings &rsaquo; MGB Patient &amp; Family Resource</strong>, where you'll find
-    switches for <strong>Microphone</strong> and <strong>Speech Recognition</strong>. Your
-    speech is converted to text on your device; audio is never recorded or sent anywhere.</p>
+    <h2>Private by design</h2>
+    <p>There is no account and no sign-up. The app never asks for your name, your contact
+    details, or any information about your child. Your bookmarks and preferences stay on your
+    device.</p>
+    <p>We collect only anonymous, aggregate statistics — like which guides are opened most —
+    so the care team can improve what's offered. Search terms are never transmitted.
+    Full details are in our <a href="privacy.html">Privacy Policy</a>.</p>
 
-    <h3>My saved items disappeared.</h3>
-    <p>Saved items are stored only on your device — they aren't tied to an account and don't
-    sync between devices. If you delete and reinstall the app, or switch to a new phone,
-    saved items won't carry over.</p>
-
-    <h3>Do I need an account?</h3>
-    <p>No. There is no sign-in, and the app never asks for your name, your contact details,
-    or any information about your child.</p>
-
-    <h3>What information does the app collect?</h3>
-    <p>The app has no accounts and collects no personal or health information. It does collect
-    anonymous, aggregate statistics about which resources are opened, so the care team can
-    improve what's offered. Search terms are never transmitted.<!-- PRIVACY LINK — uncomment the
-    sentence below only after privacy.html has been reviewed by MGB legal and published to this
-    repo. Publishing a link to a page that isn't live is an App Review rejection risk.
-    See README.md § "Publishing the privacy policy".
-    Full details are in our <a href="privacy.html">Privacy Policy</a>. --></p>
-
-    <h3>How do I send feedback about the app?</h3>
-    <p>Open <strong>Settings &rsaquo; Send App Feedback</strong>, or email us using the address
-    above.</p>
+    <h2>Need help?</h2>
+    <p>Answers to common questions, and how to reach us, are on the
+    <a href="support.html">support page</a>.</p>
 
     <h2>About this app</h2>
     <p>The MGB Patient &amp; Family Resource app is provided by Mass General Brigham for
@@ -108,6 +126,7 @@
   </main>
 
   <footer>
+    <p><a href="support.html">Support</a></p>
     <p>&copy; 2026 The General Hospital Corporation. All rights reserved.</p>
     <p>Last updated 3 August 2026.</p>
   </footer>
