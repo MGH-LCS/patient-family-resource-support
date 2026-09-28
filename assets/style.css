@@ -248,6 +248,70 @@ strong {
   font-weight: 650;
 }
 
+/* Platform-aware layout. index.html tags <html data-platform="ios|android">
+ * from the user agent before paint. The matching button becomes the one big
+ * primary action, full width so a tired parent can't miss it one-handed; the
+ * other collapses to a single text line so a relative on a different phone
+ * still has a path. No attribute (JS off, desktop, unknown device) leaves both
+ * buttons as equals. The .store-btn-lead span exists only for the demoted
+ * line ("Using an Android phone? ...") and is hidden everywhere else. */
+.store-btn-lead {
+  display: none;
+}
+
+html[data-platform] .store-row {
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+html[data-platform="ios"] .store-btn[data-store="ios"],
+html[data-platform="android"] .store-btn[data-store="android"] {
+  order: -1; /* primary always first, regardless of DOM order */
+  width: 100%;
+  min-height: 4rem;
+  align-items: center;
+  text-align: center;
+}
+
+html[data-platform="ios"] .store-btn[data-store="android"],
+html[data-platform="android"] .store-btn[data-store="ios"] {
+  display: block;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink-muted);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+html[data-platform="ios"] .store-btn[data-store="android"] .store-btn-lead,
+html[data-platform="android"] .store-btn[data-store="ios"] .store-btn-lead {
+  display: inline;
+}
+
+html[data-platform="ios"] .store-btn[data-store="android"] .store-btn-sub,
+html[data-platform="android"] .store-btn[data-store="ios"] .store-btn-sub,
+html[data-platform="ios"] .store-btn[data-store="android"] .store-btn-main,
+html[data-platform="android"] .store-btn[data-store="ios"] .store-btn-main {
+  display: inline;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+/* Once the demoted store is a live link, the store name reads as the link
+ * text: "Using an Android phone? Get it on Google Play". */
+html[data-platform="ios"] a.store-btn[data-store="android"] .store-btn-main,
+html[data-platform="android"] a.store-btn[data-store="ios"] .store-btn-main {
+  color: var(--mgb-blue);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
 .availability {
   color: var(--ink-muted);
   font-size: 0.9375rem;

@@ -17,7 +17,45 @@
 <meta property="og:url" content="https://mgh-lcs.github.io/patient-family-resource-support/">
 <meta name="twitter:card" content="summary">
 
+<!-- Apple Smart App Banner. Once the App Store listing exists, uncomment and
+     paste the numeric id from the listing URL (apps.apple.com/app/idNNNNNNNNNN).
+     iOS Safari then shows its own native "Open in the App Store" strip above the
+     page — no code, no dependency. Android has no equivalent; the page button
+     below carries that side.
+<meta name="apple-itunes-app" content="app-id=NNNNNNNNNN">
+-->
+
 <link rel="stylesheet" href="assets/style.css">
+
+<!-- ── PLATFORM DETECTION ─────────────────────────────────────────────────────
+     One QR code, one URL, one obvious button. This tags <html> with
+     data-platform="ios" | "android" so the stylesheet can promote the matching
+     store button to the single primary action and demote the other to a small
+     "Using an Android phone?" line. It runs in <head>, before the body paints,
+     so there is no flash of both buttons.
+
+     It is deliberately NOT a redirect. The scanner is often not the phone that
+     will install (a laptop, a shared unit iPad, a relative with a different
+     phone), and a redirect would skip the emergency notice and the "who made
+     this" cues that are the reason this page exists. With JavaScript off or an
+     unrecognised device, nothing happens and both buttons show as equals.
+
+     iPadOS 13+ Safari reports itself as a Mac, so "Mac with a touch screen" is
+     treated as iOS. Nothing here is sent anywhere. -->
+<script>
+(function () {
+  var ua = navigator.userAgent || "";
+  var platform = "";
+  if (/iPhone|iPad|iPod/.test(ua)) {
+    platform = "ios";
+  } else if (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1) {
+    platform = "ios";
+  } else if (/Android/.test(ua)) {
+    platform = "android";
+  }
+  if (platform) document.documentElement.setAttribute("data-platform", platform);
+})();
+</script>
 </head>
 <body>
 <div class="wrap">
@@ -41,16 +79,26 @@
     </div>
 
     <!-- ── STORE BUTTONS ──────────────────────────────────────────────────────
-         The app is not published yet, so these are deliberately inert and
+         Neither listing is live yet, so both buttons are deliberately inert and
          labelled as such. Shipping live-looking buttons that 404 is worse than
-         saying "coming soon" plainly.
+         saying "coming soon" plainly. Each button carries data-store so the
+         platform detection in <head> can promote one and demote the other
+         (see .store-row rules in assets/style.css). The visually hidden
+         .store-btn-lead span is revealed only on the demoted button, turning
+         it into a one-line "Using an Android phone? Get it on Google Play".
 
-         TO ACTIVATE, once the listing is live:
-           1. Replace the <span class="store-btn is-pending"> element with:
-              <a class="store-btn" href="https://apps.apple.com/app/idXXXXXXXXX">
-           2. Delete the .availability paragraph below.
-           3. Do the same for Google Play when that listing exists; until then,
-              leave the Play button out entirely rather than showing a dead one.
+         TO ACTIVATE a store, once its listing is live:
+           1. Change that <span class="store-btn is-pending" ...> to
+              <a class="store-btn" ...> with the listing URL as href, keeping
+              the data-store attribute and the inner spans as they are:
+                iOS      https://apps.apple.com/app/idNNNNNNNNNN
+                Android  https://play.google.com/store/apps/details?id=<applicationId>
+           2. Change its .store-btn-sub text from "Coming soon to the" / "Coming
+              soon on" to "Download on the" (Apple) / "Get it on" (Google).
+           3. Uncomment the apple-itunes-app meta tag in <head> for iOS.
+           4. Once BOTH are live, delete the .availability paragraph below.
+         The other button can stay pending on its own; the page reads fine
+         with one live and one coming soon.
 
          Official Apple/Google badge artwork is intentionally NOT used here. Both
          require downloading brand assets, and this site is deliberately
@@ -58,9 +106,15 @@
          disappear. Text buttons are compliant and never break. Swap in the
          official badges later if marketing asks. -->
     <div class="store-row">
-      <span class="store-btn is-pending">
+      <span class="store-btn is-pending" data-store="ios">
+        <span class="store-btn-lead">Using an iPhone? </span>
         <span class="store-btn-sub">Coming soon to the</span>
         <span class="store-btn-main">App Store</span>
+      </span>
+      <span class="store-btn is-pending" data-store="android">
+        <span class="store-btn-lead">Using an Android phone? </span>
+        <span class="store-btn-sub">Coming soon on</span>
+        <span class="store-btn-main">Google Play</span>
       </span>
     </div>
 
@@ -128,7 +182,7 @@
   <footer>
     <p><a href="support.html">Support</a></p>
     <p>&copy; 2026 The General Hospital Corporation. All rights reserved.</p>
-    <p>Last updated 3 August 2026.</p>
+    <p>Last updated 24 September 2026.</p>
   </footer>
 
 </div>

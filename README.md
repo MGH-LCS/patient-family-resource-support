@@ -48,12 +48,37 @@ The emergency notice ("this app is not for medical emergencies") appears at the 
 both live pages, in the same position, on purpose. A caregiver may land on either one in
 a crisis. **If you edit it on one page, edit it on the other.**
 
-The landing page's store buttons are inert placeholders styled as "coming soon" — the
-listing does not exist yet, and a live-looking button that 404s is worse than an honest
-label. Activation steps are in a comment directly above them in `index.html`. Official
+The landing page's store buttons are inert placeholders styled as "coming soon" — neither
+listing exists yet, and a live-looking button that 404s is worse than an honest label.
+Activation steps are in a comment directly above them in `index.html`. Official
 Apple/Google badge artwork is deliberately not used, because it would mean hosting
 downloaded brand assets in a site whose whole premise is that it has no dependencies to
 break.
+
+## One QR code, one URL, one obvious button
+
+The QR code on printed handouts encodes the **root URL**, never a store URL, so store
+ids and listing status can change without reprinting anything. The landing page then
+does the routing itself:
+
+- A small inline script in `<head>` reads the user agent and tags
+  `<html data-platform="ios">` or `"android"` before the page paints. iPads are caught
+  by "Mac user agent with a touch screen", because iPadOS Safari reports itself as a Mac.
+- CSS promotes the matching store button to a full-width primary action and collapses the
+  other to one line: *"Using an Android phone? Get it on Google Play"*.
+- No JavaScript, a laptop, or an unrecognised device: nothing happens, both buttons show
+  as equals.
+
+It is deliberately **not a redirect**. The device scanning the code is often not the
+phone that will install the app (a laptop, a shared unit iPad, a relative with a
+different phone), and a redirect would skip the emergency notice and the institutional
+cues that are the reason the page exists. It is also not a third-party "smart link"
+service — those put a tracking SDK and a vendor domain in front of a hospital app, which
+is the wrong trade for this audience. Nothing on the page is sent anywhere.
+
+For iOS there is additionally Apple's Smart App Banner (`apple-itunes-app` meta tag,
+commented out in `index.html` until the listing id exists), which gives Safari its own
+native "open in the App Store" strip. Android has no equivalent.
 
 There is no build step and no framework. Edit the HTML, commit, push; Pages redeploys
 in about a minute. `.nojekyll` disables Jekyll so files are served exactly as committed.
