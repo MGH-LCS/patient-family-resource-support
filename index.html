@@ -106,11 +106,18 @@
          disappear. Text buttons are compliant and never break. Swap in the
          official badges later if marketing asks. -->
     <div class="store-row">
-      <span class="store-btn is-pending" data-store="ios">
+      <!-- INTERIM (2026-10-02): the App Store listing is still in review, so the
+           iPhone button goes to the TestFlight public link instead. TestFlight
+           reads the invite code from the link itself; opening the TestFlight app
+           by hand asks for a code, which is why the button says to use the link.
+           When the listing is approved, point this at
+           https://apps.apple.com/app/idNNNNNNNNNN and restore the "Download on
+           the App Store" wording. -->
+      <a class="store-btn" href="https://testflight.apple.com/join/r1XDUYJQ" data-store="ios">
         <span class="store-btn-lead">Using an iPhone? </span>
-        <span class="store-btn-sub">Coming soon to the</span>
-        <span class="store-btn-main">App Store</span>
-      </span>
+        <span class="store-btn-sub">Install the beta version with</span>
+        <span class="store-btn-main">TestFlight</span>
+      </a>
       <span class="store-btn is-pending" data-store="android">
         <span class="store-btn-lead">Using an Android phone? </span>
         <span class="store-btn-sub">Coming soon on</span>
@@ -119,8 +126,9 @@
     </div>
 
     <p class="availability">The app is currently in testing with families in the Pediatric
-    Intensive Care Unit at Massachusetts General Hospital. If your child is in the PICU and
-    you'd like to try it, ask a member of your care team.</p>
+    Intensive Care Unit at Massachusetts General Hospital. On an iPhone, the button above
+    opens Apple's free TestFlight app, which installs the beta version; tap the button on
+    the phone itself rather than opening TestFlight on its own. Android is coming soon.</p>
 
     <h2>What the app does</h2>
 
