@@ -29,7 +29,7 @@
      lets browsers reuse files for 10 minutes, so new HTML with an old cached
      stylesheet renders broken. Bump it (same value on all three pages) on
      every style.css change. -->
-<link rel="stylesheet" href="assets/style.css?v=2026-10-09">
+<link rel="stylesheet" href="assets/style.css?v=2026-10-09.2">
 
 <!-- ── PLATFORM DETECTION ─────────────────────────────────────────────────────
      One QR code, one URL, one obvious button. This tags <html> with
@@ -97,8 +97,9 @@
            1. Point the iOS button at https://apps.apple.com/app/idNNNNNNNNNN,
               change its .store-btn-sub to "Free, from the App Store" and its
               .store-btn-alt to "Using an iPhone? Get it on the App Store".
-           2. Delete the TestFlight FAQ entry at the top of support.html's FAQ
-              (it repeats this button's join link).
+           2. Delete the .get-app-help block in the card, and the TestFlight FAQ
+              entry at the top of support.html's FAQ (it repeats this button's
+              join link).
            3. Uncomment the apple-itunes-app meta tag in <head>.
            4. Delete the .availability paragraph below.
 
@@ -121,8 +122,11 @@
              walks people through getting TestFlight and then installing the
              app. The trap: someone who installs TestFlight and then opens it
              directly (instead of returning to the link) is asked for a "Redeem"
-             code they were never given. The .availability paragraph below and
-             the first support FAQ both say the fix: tap the link again. -->
+             code they were never given, and the Redeem box can't even take this
+             link's code (it contains a digit, and testers report on 2026-10-09 that
+             Redeem has no way to type digits). The
+             fix is to tap the link again, which the .get-app-help steps below
+             and the first support FAQ both say. -->
         <a class="store-btn" href="https://testflight.apple.com/join/r1XDUYJQ" data-store="ios">
           <svg class="store-btn-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
           <span class="store-btn-text">
@@ -131,6 +135,20 @@
           </span>
           <span class="store-btn-alt">Using an iPhone? Install it with <strong>TestFlight</strong></span>
         </a>
+        <!-- Shown on iPhone and desktop, hidden on Android. Lives inside the card,
+             right under the button, so families read it BEFORE Apple sends them
+             off to the App Store, not after they are stuck in TestFlight. Delete
+             it when the App Store listing goes live. Sits inside .store-row so
+             the platform ordering keeps it directly under the iPhone button. -->
+        <div class="get-app-help">
+          <p class="get-app-help-title">New to TestFlight?</p>
+          <ol class="get-app-steps">
+            <li>Tap <strong>Install on iPhone</strong>, then get TestFlight from the App Store.</li>
+            <li><strong>Come back to this page</strong> and tap <strong>Install on iPhone</strong> again.</li>
+          </ol>
+          <p class="get-app-help-note">If you open TestFlight on its own, it asks for a code. You
+          don't need one; just come back here.</p>
+        </div>
         <a class="store-btn" href="https://play.google.com/store/apps/details?id=org.mgb.patient_family_resource" data-store="android">
           <svg class="store-btn-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
           <span class="store-btn-text">
@@ -144,9 +162,7 @@
 
     <p class="availability">The app is currently in testing with families in the Pediatric
     Intensive Care Unit at Massachusetts General Hospital. On an iPhone it installs through
-    TestFlight, Apple's free app for testing new apps. If TestFlight asks you for a code, you
-    don't need one: come back to this page and tap the button again. On Android, it's on
-    Google Play.</p>
+    TestFlight, Apple's free app for testing new apps. On Android, it's on Google Play.</p>
 
     <h2>What the app does</h2>
 
