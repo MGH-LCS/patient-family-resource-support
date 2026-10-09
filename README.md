@@ -49,11 +49,11 @@ both live pages, in the same position, on purpose. A caregiver may land on eithe
 a crisis. **If you edit it on one page, edit it on the other.**
 
 The landing page's Android button goes to the live Google Play listing. The App Store
-listing is still in review, so iPhones get an interim two-step TestFlight group: *Step 1:
-Get TestFlight*, *Step 2: Install the app*. It's two steps because someone who installs
-TestFlight and then opens it directly is asked for a "Redeem" code they were never given;
-the fix is to tap the join link again, so step 2 is a button they can come back to. The
-support page's first FAQ answers the same question. Steps to swap in the App Store button
+listing is still in review, so the iPhone button goes to the TestFlight public link, where
+Apple's own page walks people through getting TestFlight and installing the app. Someone
+who installs TestFlight and then opens it directly is asked for a "Redeem" code they were
+never given; the fix is to tap the link again. The line under the buttons and the support
+page's first FAQ both say so. Steps to swap in the App Store button
 once it's approved are in a comment directly above the buttons in `index.html`. Official
 Apple/Google badge artwork is deliberately not used, because it would mean hosting
 downloaded brand assets in a site whose whole premise is that it has no dependencies to
@@ -69,10 +69,7 @@ does the routing itself:
   `<html data-platform="ios">` or `"android"` before the page paints. iPads are caught
   by "Mac user agent with a touch screen", because iPadOS Safari reports itself as a Mac.
 - CSS promotes the matching store button to a full-width primary action and collapses the
-  other to one line: *"Using an Android phone? Get it on Google Play"*. While iPhones use
-  TestFlight, the iPhone item is the two-step group; on Android it collapses to plain
-  text with no links (*"Using an iPhone? Open this page on the iPhone…"*), because
-  neither iPhone link can install anything on an Android phone.
+  other to one line: *"Using an Android phone? Get it on Google Play"*.
 - No JavaScript, a laptop, or an unrecognised device: nothing happens, both buttons show
   as equals.
 

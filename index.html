@@ -79,22 +79,19 @@
     </div>
 
     <!-- ── STORE BUTTONS ──────────────────────────────────────────────────────
-         Android is live on Google Play. iPhone is the interim TestFlight
-         two-step group below until the App Store listing is approved. Each
-         store's element carries data-store so the platform detection in <head>
-         can promote one and demote the other (see .store-row rules in
-         assets/style.css). The .store-btn-lead span is revealed only on a
-         demoted button, turning it into a one-line "Using an Android phone?
-         Get it on Google Play".
+         Android is live on Google Play. iPhone goes to the TestFlight public
+         link until the App Store listing is approved. Each button carries
+         data-store so the platform detection in <head> can promote one and
+         demote the other (see .store-row rules in assets/style.css). The
+         .store-btn-lead span is revealed only on the demoted button, turning it
+         into a one-line "Using an Android phone? Get it on Google Play".
 
          TO ACTIVATE the App Store listing once it is approved:
-           1. Replace the whole <div class="store-steps" data-store="ios"> with
-              <a class="store-btn" href="https://apps.apple.com/app/idNNNNNNNNNN"
-              data-store="ios"> holding the same three spans as the Android
-              button: "Using an iPhone? " / "Download on the" / "App Store".
-           2. Delete the .store-steps block in assets/style.css, and the
-              TestFlight FAQ entry at the top of support.html's FAQ (it repeats
-              the join link from step 2).
+           1. Point the iOS button at https://apps.apple.com/app/idNNNNNNNNNN and
+              change its .store-btn-sub / .store-btn-main to "Download on the" /
+              "App Store".
+           2. Delete the TestFlight FAQ entry at the top of support.html's FAQ
+              (it repeats this button's join link).
            3. Uncomment the apple-itunes-app meta tag in <head>.
            4. Delete the .availability paragraph below.
 
@@ -104,36 +101,18 @@
          disappear. Text buttons are compliant and never break. Swap in the
          official badges later if marketing asks. -->
     <div class="store-row">
-      <!-- INTERIM (2026-10-09): the App Store listing is still in review, so
-           iPhones install the beta through TestFlight. Two steps, not one button,
-           because of a trap: someone without TestFlight taps the join link, is
-           sent to the App Store, installs TestFlight, then opens it directly.
-           Opened without the link, TestFlight has no invite and asks for a
-           "Redeem" code the family was never given. The fix is to tap the join
-           link again, so step 2 is a separate button they can come back to, and
-           the note says so. The steps mirror Apple's own join page ("Step 1: Get
-           TestFlight"), so the two pages agree.
-
-           On Android the group collapses to one plain line with no links: neither
-           the App Store nor the TestFlight join page can install anything on an
-           Android phone, so the only useful advice is to open this page on the
-           iPhone. Undo all of this with the activation steps above. -->
-      <div class="store-steps" data-store="ios">
-        <p class="store-steps-title">iPhone: two quick steps</p>
-        <p class="store-steps-elsewhere">Using an iPhone? Open this page on the iPhone to install the app.</p>
-        <ol class="store-steps-list" role="list">
-          <li><a class="store-btn" href="https://apps.apple.com/app/testflight/id899247664">
-            <span class="store-btn-sub">Step 1 · Free from Apple</span>
-            <span class="store-btn-main">Get TestFlight</span>
-          </a></li>
-          <li><a class="store-btn" href="https://testflight.apple.com/join/r1XDUYJQ">
-            <span class="store-btn-sub">Step 2 · Beta version</span>
-            <span class="store-btn-main">Install the app</span>
-          </a></li>
-        </ol>
-        <p class="store-steps-note">Already have TestFlight? Go straight to step 2. If TestFlight
-        asks you for a code, come back to this page and tap step 2.</p>
-      </div>
+      <!-- INTERIM: the App Store listing is still in review, so the iPhone
+           button goes to the TestFlight public link. Apple's page behind it
+           walks people through getting TestFlight and then installing the app.
+           The trap: someone who installs TestFlight and then opens it directly
+           (instead of returning to the link) is asked for a "Redeem" code they
+           were never given. The .availability paragraph below and the first
+           support FAQ both say the fix: tap the link again. -->
+      <a class="store-btn" href="https://testflight.apple.com/join/r1XDUYJQ" data-store="ios">
+        <span class="store-btn-lead">Using an iPhone? </span>
+        <span class="store-btn-sub">Install the beta version with</span>
+        <span class="store-btn-main">TestFlight</span>
+      </a>
       <a class="store-btn" href="https://play.google.com/store/apps/details?id=org.mgb.patient_family_resource" data-store="android">
         <span class="store-btn-lead">Using an Android phone? </span>
         <span class="store-btn-sub">Get it on</span>
@@ -143,7 +122,9 @@
 
     <p class="availability">The app is currently in testing with families in the Pediatric
     Intensive Care Unit at Massachusetts General Hospital. On an iPhone it installs through
-    TestFlight, Apple's free app for testing new apps. On Android, it's on Google Play.</p>
+    TestFlight, Apple's free app for testing new apps. If TestFlight asks you for a code, you
+    don't need one: come back to this page and tap the button again. On Android, it's on
+    Google Play.</p>
 
     <h2>What the app does</h2>
 
