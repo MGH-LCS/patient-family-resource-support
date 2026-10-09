@@ -48,9 +48,13 @@ The emergency notice ("this app is not for medical emergencies") appears at the 
 both live pages, in the same position, on purpose. A caregiver may land on either one in
 a crisis. **If you edit it on one page, edit it on the other.**
 
-The landing page's store buttons are inert placeholders styled as "coming soon" — neither
-listing exists yet, and a live-looking button that 404s is worse than an honest label.
-Activation steps are in a comment directly above them in `index.html`. Official
+The landing page's Android button goes to the live Google Play listing. The App Store
+listing is still in review, so iPhones get an interim two-step TestFlight group: *Step 1:
+Get TestFlight*, *Step 2: Install the app*. It's two steps because someone who installs
+TestFlight and then opens it directly is asked for a "Redeem" code they were never given;
+the fix is to tap the join link again, so step 2 is a button they can come back to. The
+support page's first FAQ answers the same question. Steps to swap in the App Store button
+once it's approved are in a comment directly above the buttons in `index.html`. Official
 Apple/Google badge artwork is deliberately not used, because it would mean hosting
 downloaded brand assets in a site whose whole premise is that it has no dependencies to
 break.
@@ -65,7 +69,10 @@ does the routing itself:
   `<html data-platform="ios">` or `"android"` before the page paints. iPads are caught
   by "Mac user agent with a touch screen", because iPadOS Safari reports itself as a Mac.
 - CSS promotes the matching store button to a full-width primary action and collapses the
-  other to one line: *"Using an Android phone? Get it on Google Play"*.
+  other to one line: *"Using an Android phone? Get it on Google Play"*. While iPhones use
+  TestFlight, the iPhone item is the two-step group; on Android it collapses to plain
+  text with no links (*"Using an iPhone? Open this page on the iPhone…"*), because
+  neither iPhone link can install anything on an Android phone.
 - No JavaScript, a laptop, or an unrecognised device: nothing happens, both buttons show
   as equals.
 

@@ -312,6 +312,81 @@ html[data-platform="android"] a.store-btn[data-store="ios"] .store-btn-main {
   text-underline-offset: 0.15em;
 }
 
+/* INTERIM TestFlight two-step group (see the comment in index.html). Promoted
+ * on iOS, collapsed to one unlinked line on Android, shown in full on desktop.
+ * The iOS half of the .store-btn[data-store] rules above matches nothing while
+ * this group is in place; it is kept so that restoring the single App Store
+ * button is an HTML-only change. Delete this whole block when that happens. */
+.store-steps-title {
+  margin: 0 0 0.5rem;
+  font-weight: 600;
+}
+
+.store-steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Cancel the global li margin so the gap alone spaces the steps. */
+.store-steps-list li {
+  margin: 0;
+}
+
+.store-steps-list .store-btn {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  text-align: center;
+}
+
+.store-steps-note {
+  margin: 0.625rem 0 0;
+  color: var(--ink-muted);
+  font-size: 0.9375rem;
+}
+
+.store-steps-elsewhere {
+  display: none;
+}
+
+/* Desktop / no JS: .store-row is a wrapping row, so the group and the Play
+ * button each take a full line, and all three buttons share one width. */
+html:not([data-platform]) .store-steps,
+html:not([data-platform]) .store-row > .store-btn[data-store="android"] {
+  flex: 1 1 100%;
+}
+
+html:not([data-platform]) .store-row > .store-btn[data-store="android"] {
+  align-items: center;
+  text-align: center;
+}
+
+html[data-platform="ios"] .store-steps {
+  order: -1;
+}
+
+html[data-platform="ios"] .store-steps-list .store-btn {
+  min-height: 4rem;
+}
+
+html[data-platform="android"] .store-steps-title,
+html[data-platform="android"] .store-steps-list,
+html[data-platform="android"] .store-steps-note {
+  display: none;
+}
+
+html[data-platform="android"] .store-steps-elsewhere {
+  display: block;
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
 .availability {
   color: var(--ink-muted);
   font-size: 0.9375rem;
