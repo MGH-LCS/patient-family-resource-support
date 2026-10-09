@@ -1,7 +1,7 @@
 # Public site — MGB Patient &amp; Family Resource
 
 Static landing, support, and privacy pages for the **MGB Patient & Family Resource** iOS
-app (Mass General Brigham for Children). Served by GitHub Pages.
+and Android app (Mass General Brigham for Children). Served by GitHub Pages.
 
 | | |
 |---|---|
@@ -134,6 +134,7 @@ code and should be re-checked whenever the app changes:
 |---|---|
 | Support email | `AppConfig.feedbackEmail` — confirmed 2026-08-03 as the monitored destination |
 | iOS 16 or later | `IPHONEOS_DEPLOYMENT_TARGET` across all six build configs |
+| Android 7.0 or later | `minSdk = flutter.minSdkVersion` in `android/app/build.gradle.kts`, which is 24 (Android 7.0) on Flutter 3.47.5 — confirmed 2026-10-09 in the release build's merged `AndroidManifest.xml`. It follows the Flutter SDK, so re-check after a Flutter upgrade |
 | iPhone, not optimized for iPad | `TARGETED_DEVICE_FAMILY = 1` |
 | English and Spanish interface | `AppConfig.enabledLocales` |
 | Background content check ≈ daily | `_otaResumeCheckThreshold` in `ota_lifecycle_observer.dart` |
