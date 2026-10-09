@@ -25,7 +25,11 @@
 <meta name="apple-itunes-app" content="app-id=NNNNNNNNNN">
 -->
 
-<link rel="stylesheet" href="assets/style.css">
+<!-- The ?v= query forces browsers to fetch the new stylesheet. GitHub Pages
+     lets browsers reuse files for 10 minutes, so new HTML with an old cached
+     stylesheet renders broken. Bump it (same value on all three pages) on
+     every style.css change. -->
+<link rel="stylesheet" href="assets/style.css?v=2026-10-09">
 
 <!-- ── PLATFORM DETECTION ─────────────────────────────────────────────────────
      One QR code, one URL, one obvious button. This tags <html> with
@@ -120,7 +124,7 @@
              code they were never given. The .availability paragraph below and
              the first support FAQ both say the fix: tap the link again. -->
         <a class="store-btn" href="https://testflight.apple.com/join/r1XDUYJQ" data-store="ios">
-          <svg class="store-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+          <svg class="store-btn-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
           <span class="store-btn-text">
             <span class="store-btn-main">Install on iPhone</span>
             <span class="store-btn-sub">Free beta via Apple&rsquo;s TestFlight</span>
@@ -128,7 +132,7 @@
           <span class="store-btn-alt">Using an iPhone? Install it with <strong>TestFlight</strong></span>
         </a>
         <a class="store-btn" href="https://play.google.com/store/apps/details?id=org.mgb.patient_family_resource" data-store="android">
-          <svg class="store-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+          <svg class="store-btn-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
           <span class="store-btn-text">
             <span class="store-btn-main">Install on Android</span>
             <span class="store-btn-sub">Free, from Google Play</span>

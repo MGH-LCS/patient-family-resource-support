@@ -86,7 +86,9 @@ commented out in `index.html` until the listing id exists), which gives Safari i
 native "open in the App Store" strip. Android has no equivalent.
 
 There is no build step and no framework. Edit the HTML, commit, push; Pages redeploys
-in about a minute. `.nojekyll` disables Jekyll so files are served exactly as committed.
+in about a minute. **When you change `assets/style.css`, bump the `?v=` on its `<link>` in all
+three pages.** Pages lets browsers reuse files for 10 minutes, so new HTML with the old
+cached stylesheet renders broken (it did, on 2026-10-09). `.nojekyll` disables Jekyll so files are served exactly as committed.
 
 ## The privacy policy was published ahead of MGB legal review
 
