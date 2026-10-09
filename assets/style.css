@@ -18,6 +18,8 @@
   --notice-rule: #ce0037;
   --draft-bg: #fff8e6;
   --draft-rule: #a9750a;
+  --cta: #003a96;
+  --cta-hover: #01828e;
   --measure: 42rem;
 }
 
@@ -34,6 +36,10 @@
     --notice-rule: #ff6b85;
     --draft-bg: #2a2312;
     --draft-rule: #e0b658;
+    /* Not --mgb-blue: that flips to a pale tint for links on dark, which made
+     * the install button look washed out. White on this blue is 5.8:1. */
+    --cta: #2a5fd0;
+    --cta-hover: #2457c5;
   }
 }
 
@@ -198,79 +204,126 @@ strong {
   font-size: 1.125rem;
 }
 
-/* Store buttons. Sized to Apple's 44x44pt minimum touch target with room to
- * spare — the audience is tired parents on a phone, often one-handed. */
+/* Get-the-app card. Borrows the shape of an App Store product header (real
+ * app icon, name, "Free", one solid button) because that is what reads as
+ * official to a family: the page is clearly the app's own, not a link to
+ * something unknown. No store badge artwork (see index.html for why). */
+.get-app {
+  margin: 0 0 1rem;
+  padding: 1.25rem;
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  background: var(--surface-sunken);
+}
+
+.get-app-head {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  margin-bottom: 1.125rem;
+}
+
+/* Approximates the iOS icon mask so the icon looks like it does on a phone. */
+.get-app-icon {
+  flex: none;
+  width: 60px;
+  height: 60px;
+  border-radius: 13px;
+  box-shadow: 0 0 0 1px var(--rule);
+}
+
+.get-app-name {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 650;
+  line-height: 1.3;
+}
+
+.get-app-meta {
+  margin: 0.125rem 0 0;
+  color: var(--ink-muted);
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+/* Store buttons. Sized well past Apple's 44pt minimum touch target, since the
+ * audience is tired parents on a phone, often one-handed. */
 .store-row {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin: 0 0 1rem;
 }
 
 .store-btn {
-  display: inline-flex;
-  flex-direction: column;
+  display: flex;
+  flex: 1 1 15rem;
+  align-items: center;
   justify-content: center;
-  min-height: 3.5rem;
-  padding: 0.5rem 1.5rem;
-  border-radius: 10px;
-  border: 1px solid var(--mgb-blue);
-  background: var(--mgb-blue);
-  color: var(--surface);
+  gap: 0.75rem;
+  min-height: 3.75rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: 12px;
+  background: var(--cta);
+  color: #ffffff;
   text-decoration: none;
   line-height: 1.25;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.12), 0 4px 12px rgb(0 0 0 / 0.08);
 }
 
 .store-btn:hover {
-  background: var(--mgb-teal);
-  border-color: var(--mgb-teal);
-  color: var(--surface);
+  background: var(--cta-hover);
+  color: #ffffff;
 }
 
-/* Pending state: the listing does not exist yet, so this must not look or
- * behave like a working link. Muted, not underlined, no pointer cursor. */
-.store-btn.is-pending {
-  background: transparent;
-  border-style: dashed;
-  border-color: var(--rule);
-  color: var(--ink-muted);
-  cursor: default;
+.store-btn:focus-visible {
+  border-radius: 12px;
 }
 
-.store-btn-sub {
-  font-size: 0.75rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+.store-btn-icon {
+  flex: none;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.store-btn-text {
+  display: flex;
+  flex-direction: column;
 }
 
 .store-btn-main {
-  font-size: 1.125rem;
+  font-size: 1.1875rem;
   font-weight: 650;
 }
 
+.store-btn-sub {
+  font-size: 0.8125rem;
+  opacity: 0.9;
+}
+
 /* Platform-aware layout. index.html tags <html data-platform="ios|android">
- * from the user agent before paint. The matching button becomes the one big
+ * from the user agent before paint. The matching button becomes the one
  * primary action, full width so a tired parent can't miss it one-handed; the
- * other collapses to a single text line so a relative on a different phone
- * still has a path. No attribute (JS off, desktop, unknown device) leaves both
- * buttons as equals. The .store-btn-lead span exists only for the demoted
- * line ("Using an Android phone? ...") and is hidden everywhere else. */
-.store-btn-lead {
+ * other collapses to its .store-btn-alt line ("Using an Android phone? Get it
+ * on Google Play") so a relative on a different phone still has a path. No
+ * attribute (JS off, desktop, unknown device) shows both buttons as equals. */
+.store-btn-alt {
   display: none;
 }
 
 html[data-platform] .store-row {
   flex-direction: column;
-  gap: 0.875rem;
+  gap: 1rem;
+}
+
+/* In the column, the row's 15rem flex-basis would become a height. */
+html[data-platform] .store-btn {
+  flex: none;
 }
 
 html[data-platform="ios"] .store-btn[data-store="ios"],
 html[data-platform="android"] .store-btn[data-store="android"] {
   order: -1; /* primary always first, regardless of DOM order */
-  width: 100%;
-  min-height: 4rem;
-  align-items: center;
-  text-align: center;
+  min-height: 4.25rem;
 }
 
 html[data-platform="ios"] .store-btn[data-store="android"],
@@ -278,34 +331,25 @@ html[data-platform="android"] .store-btn[data-store="ios"] {
   display: block;
   min-height: 0;
   padding: 0;
-  border: 0;
   border-radius: 0;
   background: transparent;
+  box-shadow: none;
   color: var(--ink-muted);
   font-size: 0.9375rem;
   line-height: 1.5;
 }
 
-html[data-platform="ios"] .store-btn[data-store="android"] .store-btn-lead,
-html[data-platform="android"] .store-btn[data-store="ios"] .store-btn-lead {
+html[data-platform="ios"] .store-btn[data-store="android"] > :not(.store-btn-alt),
+html[data-platform="android"] .store-btn[data-store="ios"] > :not(.store-btn-alt) {
+  display: none;
+}
+
+html[data-platform="ios"] .store-btn[data-store="android"] .store-btn-alt,
+html[data-platform="android"] .store-btn[data-store="ios"] .store-btn-alt {
   display: inline;
 }
 
-html[data-platform="ios"] .store-btn[data-store="android"] .store-btn-sub,
-html[data-platform="android"] .store-btn[data-store="ios"] .store-btn-sub,
-html[data-platform="ios"] .store-btn[data-store="android"] .store-btn-main,
-html[data-platform="android"] .store-btn[data-store="ios"] .store-btn-main {
-  display: inline;
-  font-size: inherit;
-  font-weight: inherit;
-  letter-spacing: normal;
-  text-transform: none;
-}
-
-/* Once the demoted store is a live link, the store name reads as the link
- * text: "Using an Android phone? Get it on Google Play". */
-html[data-platform="ios"] a.store-btn[data-store="android"] .store-btn-main,
-html[data-platform="android"] a.store-btn[data-store="ios"] .store-btn-main {
+.store-btn-alt strong {
   color: var(--mgb-blue);
   font-weight: 600;
   text-decoration: underline;

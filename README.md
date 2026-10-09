@@ -42,6 +42,7 @@ index.html              landing page — live (Marketing URL, QR-code target)
 support.html            support page + FAQ — live (Support URL)
 privacy.html            privacy policy — live (Privacy Policy URL)
 assets/style.css        shared styles; no build step, no external dependencies
+assets/app-icon.png     the app icon (Icon-App-60x60@3x.png from the app repo) for the get-the-app card
 ```
 
 The emergency notice ("this app is not for medical emergencies") appears at the top of
