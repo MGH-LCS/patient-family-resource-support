@@ -1,0 +1,223 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>PICU Subcategory Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap">
+<style>
+/* Layout: a working proposal, one section per category — the page as the app
+   draws it (a phone column) beside what each card holds and why. */
+:root {
+  --bg: #f6f7fb;
+  --surface: #ffffff;
+  --ink: #1a1c24;
+  --muted: #555a6b;
+  --line: #dfe2ec;
+  --accent: #01828e;          /* MGB teal, the app's section accent */
+  --accent-soft: #e3f1f2;
+  --done: #2f6b3a;
+  --done-soft: #e3f1e5;
+  --proposed: #7a4b00;
+  --proposed-soft: #fbefd9;
+  --font-ui: "Public Sans", "Segoe UI", system-ui, sans-serif;
+  --font-app: "Roboto", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12141a; --surface: #1b1e26; --ink: #e8eaf1; --muted: #a3a8b8; --line: #2e3240;
+    --accent: #4fb6c0; --accent-soft: #15333a; --done: #8fd19b; --done-soft: #1d3322;
+    --proposed: #f2c27a; --proposed-soft: #3a2c13; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12141a; --surface: #1b1e26; --ink: #e8eaf1; --muted: #a3a8b8; --line: #2e3240;
+  --accent: #4fb6c0; --accent-soft: #15333a; --done: #8fd19b; --done-soft: #1d3322;
+  --proposed: #f2c27a; --proposed-soft: #3a2c13; color-scheme: dark;
+}
+
+/* The phone mockups are a picture of the app's light theme, in both page themes. */
+.phone {
+  --app-surface: #faf8ff; --app-card: #f4f3fa; --app-line: #c5c6d0;
+  --app-ink: #1a1c21; --app-sub: #45464f;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-ui); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-inline: 20px; padding-block: 40px 64px; }
+
+header { max-width: 68ch; display: grid; gap: 12px; margin-bottom: 40px; }
+h1 { font-size: clamp(28px, 4vw, 38px); line-height: 1.15; margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
+.lede { color: var(--muted); margin: 0; font-size: 16px; }
+.legend { display: flex; flex-wrap: wrap; gap: 10px 18px; font-size: 13px; color: var(--muted); align-items: center; }
+
+.pill { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; letter-spacing: 0.02em; padding: 2px 9px; border-radius: 999px; white-space: nowrap; }
+.pill.done { background: var(--done-soft); color: var(--done); }
+.pill.proposed { background: var(--proposed-soft); color: var(--proposed); }
+.pill::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+
+section.cat { border-top: 1px solid var(--line); padding-block: 36px; display: grid; gap: 22px; }
+.cat-head { display: grid; gap: 6px; max-width: 70ch; }
+.cat-head h2 { margin: 0; font-size: 24px; line-height: 1.2; text-wrap: balance; }
+.cat-head p { margin: 0; color: var(--muted); }
+.eyebrow { text-transform: uppercase; letter-spacing: 0.08em; font-size: 12px; font-weight: 600; color: var(--accent); }
+
+.cat-body { display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 32px; align-items: start; }
+@media (max-width: 820px) { .cat-body { grid-template-columns: minmax(0, 1fr); } }
+
+/* Phone column */
+.phone { background: var(--app-surface); border: 1px solid var(--line); border-radius: 28px; padding: 18px 0 22px; box-shadow: 0 8px 28px rgb(20 24 40 / 0.10); font-family: var(--font-app); color: var(--app-ink); max-width: 340px; width: 100%; }
+.phone-title { display: flex; align-items: center; gap: 10px; padding: 4px 18px 14px; font-size: 21px; }
+.phone-title .back { font-size: 20px; color: var(--app-ink); }
+.app-cards, .app-list { display: grid; gap: 10px; padding-inline: 14px; }
+.app-list { margin-top: 18px; }
+.app-card { background: var(--app-card); border: 1px solid var(--app-line); border-radius: 12px; padding: 12px 12px 12px 14px; display: flex; gap: 10px; align-items: center; }
+.app-card .txt { flex: 1; min-width: 0; }
+.app-card .nm { font-weight: 700; font-size: 16px; line-height: 1.25; }
+.app-card .ln { font-size: 13px; color: var(--app-sub); line-height: 1.4; margin-top: 2px; }
+.app-card .ct { font-size: 14px; font-weight: 500; color: var(--app-sub); font-variant-numeric: tabular-nums; }
+.app-card .chev { color: var(--app-sub); font-size: 18px; line-height: 1; }
+.app-res { background: var(--app-card); border: 1px solid var(--app-line); border-radius: 12px; padding: 10px 14px; font-weight: 700; font-size: 14px; line-height: 1.3; }
+.phone-note { font-family: var(--font-ui); font-size: 12px; color: #6a6e7c; text-align: center; margin: 14px 18px 0; }
+
+/* Detail column */
+.groups { display: grid; gap: 14px; min-width: 0; }
+.group { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; display: grid; gap: 8px; min-width: 0; }
+.group-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.group-top h3 { margin: 0; font-size: 17px; line-height: 1.3; }
+.group-top .n { color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; }
+.short { margin: 0; font-size: 14px; color: var(--muted); }
+.short b { color: var(--ink); font-weight: 600; }
+.group ol, .group ul { margin: 2px 0 0; padding-left: 22px; display: grid; gap: 3px; font-size: 14px; }
+.why { margin: 2px 0 0; font-size: 13.5px; color: var(--muted); border-top: 1px dashed var(--line); padding-top: 8px; }
+.why b { color: var(--ink); font-weight: 600; }
+.group.below { background: transparent; border-style: dashed; }
+
+.flat { border-top: 1px solid var(--line); padding-block: 32px 0; max-width: 72ch; display: grid; gap: 8px; }
+.flat h2 { margin: 0; font-size: 20px; }
+.flat p { margin: 0; color: var(--muted); }
+.flat ul { margin: 4px 0 0; padding-left: 22px; display: grid; gap: 4px; }
+
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">PICU · Proposal · October 23, 2026</div>
+    <h1>Subcategories for Educational Resources and Parent &amp; Family Support</h1>
+    <p class="lede">These are the two longest lists in the app. Each proposed card opens a page with just its resources; anything not in a card is listed below the cards. Every published resource in both categories is accounted for here.</p>
+    <div class="legend">
+      <span class="pill done">In drafts</span><span>set up, not yet published</span>
+      <span class="pill proposed">Proposed</span><span>for discussion</span>
+    </div>
+  </header>
+
+  <div id="cats"></div>
+
+  <section class="flat" aria-labelledby="flat-h">
+    <h2 id="flat-h">Categories that stay as they are</h2>
+    <p>These lists are short enough that cards would only add a tap.</p>
+    <ul>
+      <li>Hospital Stay (9)</li>
+      <li>Administrative Resources (8)</li>
+      <li>Meet the Care Team (6)</li>
+      <li>Outside of the Hospital, Parking, Discharge Planning, Campus Map, Gift Shop, Transportation (3 or fewer each)</li>
+    </ul>
+  </section>
+</div>
+
+<script>
+const CATS = [
+  {
+    name: "Educational Resources",
+    total: 27,
+    intro: "27 resources today, from breastfeeding to teen driving. Six cards, three resources left below them.",
+    groups: [
+      { name: "Breastfeeding", status: "done", line: "Latching, pumping, medications, and where to find help",
+        items: ["Breastfeeding: Getting Started", "Lactation Support Program", "Medications While Breastfeeding", "Breastfeeding Support Near Home", "Breastfeeding Handouts"],
+        why: "In the order a parent's needs come up: the basics, help here, the “can I take this?” question, help at home, printables." },
+      { name: "Trach care", status: "done", line: "Videos: what to expect, suctioning, and changing the tube",
+        items: ["Pediatric Tracheostomy: What You Need to Know", "Pediatric Tracheostomy: How to Suction a Trach", "Pediatric Tracheostomy: How to Exchange a Trach"],
+        why: "Overview first, then the everyday skill, then the less frequent one. Shown from First Few Days through We’re Home." },
+      { name: "Keeping kids safe", status: "proposed", line: "CPR, car seats, childproofing, water, guns, and driving",
+        items: ["Learn Child and Adult CPR", "Car Seat Safety", "Childproofing Your Home", "Drowning Prevention", "Gun Safety: How to Discuss with Any Age Child", "Safe Driving for Teens"],
+        why: "All six are about preventing injury, for children of any age. CPR first because it applies to every family." },
+      { name: "Asthma and lung conditions", status: "proposed", line: "Asthma, bronchitis, and long-term lung conditions",
+        items: ["Asthma: What You Need to Know", "Acute Bronchitis in Children", "Chronic Lung Conditions"],
+        why: "Kept apart from Trach care on purpose, so a parent of a child with asthma doesn’t have to look inside a trach card." },
+      { name: "Teens and young adults", status: "proposed", line: "Managing their own care, relationships, and turning 18",
+        items: ["Medication Reminder Smartphone Apps", "Navigating Relationships with a Chronic Illness", "Guardianship: What You Need to Know"],
+        why: "All three are about a young person taking over their own life with a health condition. Safe Driving for Teens could also appear here; a resource can sit in two cards." },
+      { name: "Specialists and programs", status: "proposed", line: "Surgery, autism, youth mental health, and finding care at Mass General Brigham",
+        items: ["Mass General Brigham for Children", "Pediatric Surgery", "Autism Spectrum Disorder", "Clay Center for Young Healthy Minds"],
+        why: "Each one points families to a Mass General Brigham service or program rather than teaching a skill." }
+    ],
+    below: {
+      items: ["Healthy Sleep Habits for Your Baby", "The Benefits of Childhood Vaccines", "Rights for Non-Citizens"],
+      why: "<b>Open questions.</b> Sleep and vaccines could become a small “Healthy babies” card (2). Rights for Non-Citizens may belong in Parent &amp; Family Support or Administrative instead of here."
+    }
+  },
+  {
+    name: "Parent & Family Support",
+    total: 17,
+    intro: "17 resources for the parent and the rest of the family. Four cards cover all of them.",
+    groups: [
+      { name: "Calm and coping", status: "proposed", line: "Mindfulness, breathing, and journaling for every age",
+        items: ["Meditation: Breathing Space Exercise", "Journal Writing to Manage Stress", "Journal Writing Prompts for Teens Age 13 and Older", "Mindfulness Tips for Toddlers", "Mindfulness Tips for Young Children", "Mindfulness Tips for Adolescents"],
+        why: "Things a parent can do right now, alone or with their children. The quickest one (a four-minute meditation) first." },
+      { name: "Mental health support", status: "proposed", line: "Help lines, therapists, postpartum support, and grief",
+        items: ["Massachusetts Behavioral Health Help Line", "How to Find a Therapist", "Outpatient Mental Health Services", "Postpartum and New Parent Support", "Bereavement Resources"],
+        why: "Where to reach a person. The 24/7 help line first, grief support last." },
+      { name: "Helping siblings and children", status: "proposed", line: "Explaining the hospital to kids and supporting brothers and sisters",
+        items: ["My Loved One in the Hospital — A Social Story for Kids", "Support for Siblings of a Special Needs Child", "PACT Program: Parenting While Battling Serious Illness"],
+        why: "For the children at home who are watching this happen." },
+      { name: "Community and financial help", status: "proposed", line: "Relief funds, community groups, and family advisory councils",
+        items: ["Catastrophic Illness in Children Relief Fund (CICRF)", "Community Resources for Caregivers of Children", "Patient and Family Advisory Councils"],
+        why: "Support from outside the hospital. The advisory councils fit least well here; they are a way to give back rather than get help." }
+    ],
+    below: null
+  }
+];
+
+const esc = (s) => s.replace(/&(?!amp;)/g, "&amp;").replace(/</g, "&lt;");
+const statusPill = (s) => s === "done" ? '<span class="pill done">In drafts</span>' : '<span class="pill proposed">Proposed</span>';
+
+document.getElementById("cats").innerHTML = CATS.map((c, ci) => {
+  const phoneCards = c.groups.map(g => `
+    <div class="app-card"><div class="txt"><div class="nm">${esc(g.name)}</div><div class="ln">${esc(g.line)}</div></div>
+    <span class="ct">${g.items.length}</span><span class="chev" aria-hidden="true">›</span></div>`).join("");
+  const phoneBelow = c.below ? `<div class="app-list">${c.below.items.map(t => `<div class="app-res">${esc(t)}</div>`).join("")}</div>` : "";
+  const groups = c.groups.map(g => `
+    <article class="group">
+      <div class="group-top"><h3>${esc(g.name)}</h3><span class="n">${g.items.length} resource${g.items.length === 1 ? "" : "s"}</span>${statusPill(g.status)}</div>
+      <p class="short">Short line: <b>${esc(g.line)}</b></p>
+      <ol>${g.items.map(t => `<li>${esc(t)}</li>`).join("")}</ol>
+      <p class="why">${esc(g.why)}</p>
+    </article>`).join("");
+  const below = c.below ? `
+    <article class="group below">
+      <div class="group-top"><h3>Listed below the cards</h3><span class="n">${c.below.items.length} resources</span></div>
+      <ul>${c.below.items.map(t => `<li>${esc(t)}</li>`).join("")}</ul>
+      <p class="why">${c.below.why}</p>
+    </article>` : "";
+  const placed = c.groups.reduce((n, g) => n + g.items.length, 0) + (c.below ? c.below.items.length : 0);
+  return `
+  <section class="cat" aria-labelledby="cat-${ci}">
+    <div class="cat-head">
+      <div class="eyebrow">Category</div>
+      <h2 id="cat-${ci}">${esc(c.name)}</h2>
+      <p>${esc(c.intro)}</p>
+    </div>
+    <div class="cat-body">
+      <div class="phone" role="img" aria-label="How the ${esc(c.name)} page would look in the app">
+        <div class="phone-title"><span class="back" aria-hidden="true">‹</span>${esc(c.name)}</div>
+        <div class="app-cards">${phoneCards}</div>
+        ${phoneBelow}
+        <p class="phone-note">Everything view · ${placed} of ${c.total} resources shown</p>
+      </div>
+      <div class="groups">${groups}${below}</div>
+    </div>
+  </section>`;
+}).join("");
+</script>
+
+</body></html>
