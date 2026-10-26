@@ -1,0 +1,192 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>App Store vs TestFlight</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: one reading column. Two version cards up top, then "in both", then a two-column comparison that stacks on phones. */
+:root {
+  --bg: #f5f8f9;
+  --surface: #ffffff;
+  --fg: #16262c;
+  --muted: #56686f;
+  --line: #d9e3e6;
+  --accent: #0d7f86;
+  --accent-soft: #e2f2f2;
+  --store: #3d5a80;
+  --store-soft: #e7edf5;
+  --font-display: "Newsreader", Georgia, "Times New Roman", serif;
+  --font-body: "Public Sans", -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1a1d; --surface: #16252a; --fg: #e6eef0; --muted: #9db0b6; --line: #27393f;
+    --accent: #4cc3c8; --accent-soft: #173438; --store: #9db8dd; --store-soft: #1c2a3b; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1a1d; --surface: #16252a; --fg: #e6eef0; --muted: #9db0b6; --line: #27393f;
+  --accent: #4cc3c8; --accent-soft: #173438; --store: #9db8dd; --store-soft: #1c2a3b; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 16px; line-height: 1.55; padding: 0 16px; }
+main { max-width: 760px; margin: 0 auto; padding-block: 40px 64px; display: flex; flex-direction: column; gap: 36px; }
+header { display: flex; flex-direction: column; gap: 8px; }
+.eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin: 0; }
+h1 { font-family: var(--font-display); font-weight: 600; font-size: clamp(28px, 6vw, 40px); line-height: 1.15; margin: 0; text-wrap: balance; }
+h2 { font-family: var(--font-display); font-weight: 600; font-size: 25px; line-height: 1.2; margin: 0; text-wrap: balance; }
+h3 { font-size: 16px; font-weight: 600; margin: 0; line-height: 1.35; }
+p { margin: 0; }
+.lede { color: var(--muted); max-width: 62ch; }
+section { display: flex; flex-direction: column; gap: 14px; }
+.versions { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.version { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.version .name { font-weight: 600; }
+.version .build { font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.pill { align-self: flex-start; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; border-radius: 4px; padding: 2px 7px; }
+.pill.store { color: var(--store); background: var(--store-soft); }
+.pill.tf { color: var(--accent); background: var(--accent-soft); }
+.note { background: var(--accent-soft); border-radius: 8px; padding: 12px 16px; font-size: 15px; }
+ul.both { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; max-width: 66ch; }
+.rows { display: flex; flex-direction: column; gap: 10px; }
+.row { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.col { min-width: 0; display: flex; flex-direction: column; gap: 4px; font-size: 15px; }
+.col .label { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.col.tf .label { color: var(--accent); }
+.col.store .label { color: var(--store); }
+.col.store { color: var(--muted); }
+@media (max-width: 560px) { .cols { grid-template-columns: 1fr; gap: 10px; } }
+footer { font-size: 14px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 16px; }
+</style>
+
+<main>
+  <header>
+    <p class="eyebrow">Patient Family Resource app</p>
+    <h1>What’s in the App Store version, and what’s only in TestFlight</h1>
+    <p class="lede">Apple has approved a release. It’s a slightly older build than the one you have in TestFlight, so a few newer features aren’t in it yet. This page lists what each version has.</p>
+  </header>
+
+  <section aria-label="The two versions">
+    <div class="versions">
+      <div class="version">
+        <span class="pill store">App Store</span>
+        <span class="name">Approved release</span>
+        <span class="build">Version 1.0.0 (26101401) · built October 14</span>
+      </div>
+      <div class="version">
+        <span class="pill tf">TestFlight</span>
+        <span class="name">Latest test build</span>
+        <span class="build">Version 1.0.0 (26102302) · built October 23</span>
+      </div>
+    </div>
+    <p class="note">Both versions get the same content: the same resources, pages and updates. The App Store version just shows some of it more simply, as described below.</p>
+  </section>
+
+  <section>
+    <h2>In both versions</h2>
+    <ul class="both">
+      <li>Setup when you first open the app: choose your hospital, unit and where you are in your stay.</li>
+      <li>Home screen of topic cards, each showing how many resources it has. You can turn the counts off in Settings.</li>
+      <li>Filtering by where you are in your stay, from Preparing to Come In to We’re Home.</li>
+      <li>Category pages with helpful information above the resources, such as café listings, checklists and tips.</li>
+      <li>Some cards go straight to one resource or PDF, such as the campus map.</li>
+      <li>Search across resource titles and the text inside them.</li>
+      <li>Essentials, a quick list in the search bar for showers, laundry, food, Wi-Fi, parking and more.</li>
+      <li>Saved resources, contacts, sharing and printing.</li>
+      <li>Short summaries under each resource, which you can show or hide.</li>
+      <li>In-app feedback.</li>
+      <li>New content arrives on its own, with no app update needed.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Only in TestFlight for now</h2>
+    <p class="lede">These features will reach the App Store version in the next release. Until then, here’s what you’ll see in each version.</p>
+
+    <div class="rows">
+      <div class="row">
+        <h3>Subcategories on category pages</h3>
+        <div class="cols">
+          <div class="col tf"><span class="label">TestFlight</span>Educational Resources has Breastfeeding and Trach care cards, and each one opens a page of just those resources.</div>
+          <div class="col store"><span class="label">App Store</span>Educational Resources shows one list of all its resources.</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <h3>Pull to refresh</h3>
+        <div class="cols">
+          <div class="col tf"><span class="label">TestFlight</span>Pull down on the home screen to check for new content. A message says whether anything changed.</div>
+          <div class="col store"><span class="label">App Store</span>New content still arrives, but on its own when the app is opened.</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <h3>Phase tabs</h3>
+        <div class="cols">
+          <div class="col tf"><span class="label">TestFlight</span>Your phase and “Everything” are tabs at the top of home and of each category page. Tap the phase name to change it. The timeline can be turned on or off in Settings → Display.</div>
+          <div class="col store"><span class="label">App Store</span>The phase timeline sits at the top of home, and the phase chip in the search bar switches the filter.</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <h3>Section headings on category pages</h3>
+        <div class="cols">
+          <div class="col tf"><span class="label">TestFlight</span>Food &amp; Dining is split into cafeterias, vending machines and food nearby, with chips to jump between them.</div>
+          <div class="col store"><span class="label">App Store</span>Same cafés and information, without those three headings.</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <h3>“Open now” on cafés</h3>
+        <div class="cols">
+          <div class="col tf"><span class="label">TestFlight</span>Café cards show an Open now or Closed pill beside the name.</div>
+          <div class="col store"><span class="label">App Store</span>Café cards show the opening hours, without the pill.</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <h3>Phone, email and place cards</h3>
+        <div class="cols">
+          <div class="col tf"><span class="label">TestFlight</span>Phone numbers and email addresses are cards you tap to call or write. Places, like the billing office, get a card with address, phone, email and website.</div>
+          <div class="col store"><span class="label">App Store</span>Phone and email are still tappable links that call or open mail. Place details show as regular text.</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <h3>Search shows each result’s category</h3>
+        <div class="cols">
+          <div class="col tf"><span class="label">TestFlight</span>A small icon and category name sit above each result’s title.</div>
+          <div class="col store"><span class="label">App Store</span>Results show the title only.</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <h3>Essentials goes straight to the answer</h3>
+        <div class="cols">
+          <div class="col tf"><span class="label">TestFlight</span>Essentials opens full screen with a close button. Rows like Laundry or Visiting hours open right at the part of the page that answers the question. Visiting hours has a clock icon.</div>
+          <div class="col store"><span class="label">App Store</span>The same rows open the page at the top. Visiting hours has a general info icon.</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <h3>Spanish resource titles</h3>
+        <div class="cols">
+          <div class="col tf"><span class="label">TestFlight</span>With the app in Spanish, resource titles show in Spanish where a translation exists.</div>
+          <div class="col store"><span class="label">App Store</span>Titles stay in English. The resource text is still in Spanish where available.</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <h3>Back to top on category pages</h3>
+        <div class="cols">
+          <div class="col tf"><span class="label">TestFlight</span>A button appears on long category pages to jump back to the top.</div>
+          <div class="col store"><span class="label">App Store</span>No button. Scroll up as usual.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>If something looks different from what you expect in either version, send a note with a screenshot and say whether you were using the App Store or the TestFlight version.</footer>
+</main>
+
+</body></html>
