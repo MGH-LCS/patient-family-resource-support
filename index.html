@@ -17,19 +17,17 @@
 <meta property="og:url" content="https://mgh-lcs.github.io/patient-family-resource-support/">
 <meta name="twitter:card" content="summary">
 
-<!-- Apple Smart App Banner. Once the App Store listing exists, uncomment and
-     paste the numeric id from the listing URL (apps.apple.com/app/idNNNNNNNNNN).
-     iOS Safari then shows its own native "Open in the App Store" strip above the
-     page — no code, no dependency. Android has no equivalent; the page button
-     below carries that side.
-<meta name="apple-itunes-app" content="app-id=NNNNNNNNNN">
--->
+<!-- Apple Smart App Banner. The id is the App Store listing's
+     (apps.apple.com/app/id6772264792). iOS Safari shows its own native
+     "Open in the App Store" strip above the page — no code, no dependency.
+     Android has no equivalent; the page button below carries that side. -->
+<meta name="apple-itunes-app" content="app-id=6772264792">
 
 <!-- The ?v= query forces browsers to fetch the new stylesheet. GitHub Pages
      lets browsers reuse files for 10 minutes, so new HTML with an old cached
      stylesheet renders broken. Bump it (same value on all three pages) on
      every style.css change. -->
-<link rel="stylesheet" href="assets/style.css?v=2026-10-09.2">
+<link rel="stylesheet" href="assets/style.css?v=2026-10-26.1">
 
 <!-- ── PLATFORM DETECTION ─────────────────────────────────────────────────────
      One QR code, one URL, one obvious button. This tags <html> with
@@ -83,8 +81,8 @@
     </div>
 
     <!-- ── GET THE APP ────────────────────────────────────────────────────────
-         Android is live on Google Play. iPhone goes to the TestFlight public
-         link until the App Store listing is approved. The card copies the shape
+         Both stores are live: iPhone goes to the App Store listing, Android to
+         Google Play. The card copies the shape
          of an App Store product header (real app icon, name, "Free", one solid
          button) because that is what reads as official to a family.
 
@@ -93,19 +91,8 @@
          assets/style.css). A demoted button hides everything except its
          .store-btn-alt line, e.g. "Using an Android phone? Get it on Google Play".
 
-         TO ACTIVATE the App Store listing once it is approved:
-           1. Point the iOS button at https://apps.apple.com/app/idNNNNNNNNNN,
-              change its .store-btn-sub to "Free, from the App Store" and its
-              .store-btn-alt to "Using an iPhone? Get it on the App Store".
-           2. Delete the .get-app-help block in the card, and the TestFlight FAQ
-              entry at the top of support.html's FAQ (it repeats this button's
-              join link).
-           3. Uncomment the apple-itunes-app meta tag in <head>.
-           4. Delete the .availability paragraph below.
-
          Official Apple/Google badge artwork is intentionally NOT used here. Both
-         require downloading brand assets, and Apple's badge may only link to the
-         App Store, not TestFlight. Text buttons are compliant and never break.
+         require downloading brand assets. Text buttons are compliant and never break.
          assets/app-icon.png is the app's own icon (Icon-App-60x60@3x.png from
          the app repo); replace it if the app icon changes. -->
     <section class="get-app" aria-label="Get the app">
@@ -117,38 +104,14 @@
         </div>
       </div>
       <div class="store-row">
-        <!-- INTERIM: the App Store listing is still in review, so the iPhone
-             button goes to the TestFlight public link. Apple's page behind it
-             walks people through getting TestFlight and then installing the
-             app. The trap: someone who installs TestFlight and then opens it
-             directly (instead of returning to the link) is asked for a "Redeem"
-             code they were never given, and the Redeem box can't even take this
-             link's code (it contains a digit, and testers report on 2026-10-09 that
-             Redeem has no way to type digits). The
-             fix is to tap the link again, which the .get-app-help steps below
-             and the first support FAQ both say. -->
-        <a class="store-btn" href="https://testflight.apple.com/join/r1XDUYJQ" data-store="ios">
+        <a class="store-btn" href="https://apps.apple.com/app/id6772264792" data-store="ios">
           <svg class="store-btn-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
           <span class="store-btn-text">
             <span class="store-btn-main">Install on iPhone</span>
-            <span class="store-btn-sub">Free beta via Apple&rsquo;s TestFlight</span>
+            <span class="store-btn-sub">Free, from the App Store</span>
           </span>
-          <span class="store-btn-alt">Using an iPhone? Install it with <strong>TestFlight</strong></span>
+          <span class="store-btn-alt">Using an iPhone? Get it on the <strong>App Store</strong></span>
         </a>
-        <!-- Shown on iPhone and desktop, hidden on Android. Lives inside the card,
-             right under the button, so families read it BEFORE Apple sends them
-             off to the App Store, not after they are stuck in TestFlight. Delete
-             it when the App Store listing goes live. Sits inside .store-row so
-             the platform ordering keeps it directly under the iPhone button. -->
-        <div class="get-app-help">
-          <p class="get-app-help-title">New to TestFlight?</p>
-          <ol class="get-app-steps">
-            <li>Tap <strong>Install on iPhone</strong>, then get TestFlight from the App Store.</li>
-            <li><strong>Come back to this page</strong> and tap <strong>Install on iPhone</strong> again.</li>
-          </ol>
-          <p class="get-app-help-note">If you open TestFlight on its own, it asks for a code. You
-          don't need one; just come back here.</p>
-        </div>
         <a class="store-btn" href="https://play.google.com/store/apps/details?id=org.mgb.patient_family_resource" data-store="android">
           <svg class="store-btn-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
           <span class="store-btn-text">
@@ -159,10 +122,6 @@
         </a>
       </div>
     </section>
-
-    <p class="availability">The app is currently in testing with families in the Pediatric
-    Intensive Care Unit at Massachusetts General Hospital. On an iPhone it installs through
-    TestFlight, Apple's free app for testing new apps. On Android, it's on Google Play.</p>
 
     <h2>What the app does</h2>
 

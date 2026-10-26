@@ -49,13 +49,10 @@ The emergency notice ("this app is not for medical emergencies") appears at the 
 both live pages, in the same position, on purpose. A caregiver may land on either one in
 a crisis. **If you edit it on one page, edit it on the other.**
 
-The landing page's Android button goes to the live Google Play listing. The App Store
-listing is still in review, so the iPhone button goes to the TestFlight public link, where
-Apple's own page walks people through getting TestFlight and installing the app. Someone
-who installs TestFlight and then opens it directly is asked for a "Redeem" code they were
-never given; the fix is to tap the link again. The line under the buttons and the support
-page's first FAQ both say so. Steps to swap in the App Store button
-once it's approved are in a comment directly above the buttons in `index.html`. Official
+The landing page's buttons go to the live store listings: iPhone to the App Store
+(`apps.apple.com/app/id6772264792`, the short form that survives an app rename) and
+Android to Google Play. The same App Store id drives the Smart App Banner meta tag in
+`<head>`. Official
 Apple/Google badge artwork is deliberately not used, because it would mean hosting
 downloaded brand assets in a site whose whole premise is that it has no dependencies to
 break.
