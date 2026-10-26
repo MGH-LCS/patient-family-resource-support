@@ -68,11 +68,16 @@ does the routing itself:
   by "Mac user agent with a touch screen", because iPadOS Safari reports itself as a Mac.
 - CSS promotes the matching store button to a full-width primary action and collapses the
   other to one line: *"Using an Android phone? Get it on Google Play"*.
-- No JavaScript, a laptop, or an unrecognised device: nothing happens, both buttons show
-  as equals.
+- A computer (not iOS or Android, no touch screen) gets a QR code of this same page in
+  place of the buttons: *"Scan with your phone's camera to open this page on your phone, then tap Install."* On a Mac, Safari
+  hands App Store links to the Mac App Store, which calls this iPhone-only app "not
+  available", and no computer can install it anyway. The phone that scans lands here and
+  gets its own store button.
+- No JavaScript, or an unrecognised touch device (e.g. an Android tablet asking for the
+  desktop site): nothing happens, both buttons show as equals.
 
 It is deliberately **not a redirect**. The device scanning the code is often not the
-phone that will install the app (a laptop, a shared unit iPad, a relative with a
+phone that will install the app (a shared unit iPad, a relative with a
 different phone), and a redirect would skip the emergency notice and the institutional
 cues that are the reason the page exists. It is also not a third-party "smart link"
 service — those put a tracking SDK and a vendor domain in front of a hospital app, which

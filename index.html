@@ -27,23 +27,27 @@
      lets browsers reuse files for 10 minutes, so new HTML with an old cached
      stylesheet renders broken. Bump it (same value on all three pages) on
      every style.css change. -->
-<link rel="stylesheet" href="assets/style.css?v=2026-10-26.1">
+<link rel="stylesheet" href="assets/style.css?v=2026-10-26.2">
 
 <!-- ── PLATFORM DETECTION ─────────────────────────────────────────────────────
      One QR code, one URL, one obvious button. This tags <html> with
      data-platform="ios" | "android" so the stylesheet can promote the matching
      store button to the single primary action and demote the other to a small
-     "Using an Android phone?" line. It runs in <head>, before the body paints,
+     "Using an Android phone?" line. A computer gets "desktop", which swaps the
+     buttons for a scan-with-your-phone QR code (see .get-app-qr below). It runs in <head>, before the body paints,
      so there is no flash of both buttons.
 
      It is deliberately NOT a redirect. The scanner is often not the phone that
      will install (a laptop, a shared unit iPad, a relative with a different
      phone), and a redirect would skip the emergency notice and the "who made
      this" cues that are the reason this page exists. With JavaScript off or an
-     unrecognised device, nothing happens and both buttons show as equals.
+     unrecognised touch device, nothing happens and both buttons show as equals.
 
      iPadOS 13+ Safari reports itself as a Mac, so "Mac with a touch screen" is
-     treated as iOS. Nothing here is sent anywhere. -->
+     treated as iOS. "desktop" also requires no touch screen, because Chrome on
+     Android tablets asks for desktop sites with a Linux user agent; such a
+     tablet keeps the buttons instead of a QR code it can't scan. Nothing here
+     is sent anywhere. -->
 <script>
 (function () {
   var ua = navigator.userAgent || "";
@@ -54,6 +58,8 @@
     platform = "ios";
   } else if (/Android/.test(ua)) {
     platform = "android";
+  } else if (!(navigator.maxTouchPoints > 0)) {
+    platform = "desktop";
   }
   if (platform) document.documentElement.setAttribute("data-platform", platform);
 })();
@@ -120,6 +126,19 @@
           </span>
           <span class="store-btn-alt">Using an Android phone? Get it on <strong>Google Play</strong></span>
         </a>
+      </div>
+      <!-- Computers only (data-platform="desktop"); hidden everywhere else, so
+           with JavaScript off the buttons above still show. On a Mac, Safari
+           hands any App Store link to the Mac App Store, which says this
+           iPhone-only app "isn't available", and no computer can install a
+           phone app anyway. The code opens this same page (the root URL, as on
+           the printed handouts), so the phone then shows its own store button.
+           Regenerate with:
+           qrencode -t SVG --svg-path -m 4 -l M -o assets/qr-landing.svg 'https://mgh-lcs.github.io/patient-family-resource-support/' -->
+      <div class="get-app-qr">
+        <img src="assets/qr-landing.svg" width="132" height="132" alt="QR code that opens this page">
+        <p><strong>Scan with your phone&rsquo;s camera</strong> to open this page on your
+        phone, then tap Install.</p>
       </div>
     </section>
 

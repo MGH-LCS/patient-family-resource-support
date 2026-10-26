@@ -300,12 +300,13 @@ strong {
   opacity: 0.9;
 }
 
-/* Platform-aware layout. index.html tags <html data-platform="ios|android">
+/* Platform-aware layout. index.html tags <html data-platform="ios|android|desktop">
  * from the user agent before paint. The matching button becomes the one
  * primary action, full width so a tired parent can't miss it one-handed; the
  * other collapses to its .store-btn-alt line ("Using an Android phone? Get it
  * on Google Play") so a relative on a different phone still has a path. No
- * attribute (JS off, desktop, unknown device) shows both buttons as equals. */
+ * attribute (JS off, unknown touch device) shows both buttons as equals. A
+ * computer ("desktop") gets .get-app-qr instead of the buttons. */
 .store-btn-alt {
   display: none;
 }
@@ -347,6 +348,34 @@ html[data-platform="android"] .store-btn[data-store="ios"] > :not(.store-btn-alt
 html[data-platform="ios"] .store-btn[data-store="android"] .store-btn-alt,
 html[data-platform="android"] .store-btn[data-store="ios"] .store-btn-alt {
   display: inline;
+}
+
+/* Computers: a QR code of this page in place of the store buttons. The SVG
+ * carries its own white tile and quiet zone, so it scans in dark mode too. */
+.get-app-qr {
+  display: none;
+}
+
+html[data-platform="desktop"] .store-row {
+  display: none;
+}
+
+html[data-platform="desktop"] .get-app-qr {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.get-app-qr img {
+  flex: none;
+  border-radius: 8px;
+  box-shadow: 0 0 0 1px var(--rule);
+}
+
+.get-app-qr p {
+  margin: 0;
+  max-width: 22rem;
+  line-height: 1.5;
 }
 
 .store-btn-alt strong {
